@@ -1,10 +1,14 @@
 
-import './App.css';
-import Timeline from './Timeline.js';
+import './App.css'
+import Timeline from './Timeline.js'
+import FloatingButton from './FloatingButton.js'
 
 function App() {
   return (
-    <Timeline></Timeline>
+    <div>
+      <Timeline></Timeline>
+      <FloatingButton></FloatingButton>
+    </div>
   );
 }
 
