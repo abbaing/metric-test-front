@@ -13,8 +13,8 @@ export default class FloatingButton extends Component {
 
   render() {
     const buttons = [
-        { onClick: ()=> alert('clicked icon1'), src: addPencilIcon },
-        { onClick: ()=> alert('clicked icon2'), src: addBlankIcon },
+        { onClick: ()=> this.props.onClickOpenModal(), src: addPencilIcon },
+        { onClick: ()=> this.props.onClickOpenModal(), src: addBlankIcon },
     ];
     return <FloatingButtons dimension={50} buttonsList={buttons} buttonType="plus" dimension={50} top={"85%"} left={"90%"} direction="left" />
   }
