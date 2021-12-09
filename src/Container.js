@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import './Container.css'
 import Timeline from './Timeline.js'
@@ -12,18 +12,25 @@ class MainContainer extends React.Component {
         this.state = {
             isNewMetricVisible: false,
         }
-        this.onClickOpenModal = this.onClickOpenModal.bind(this)
+        this.onClickOpenModal = this.onClickOpenModal.bind(this);
+        this.onClickCloseModal = this.onClickCloseModal.bind(this)
     }
 
     onClickOpenModal() {
-        this.setState(isNewMetricVisible => ({ isNewMetricVisible: true }));
+        this.setState({ isNewMetricVisible: true });
+    }
+
+    onClickCloseModal() {
+        this.setState({ isNewMetricVisible: false });
     }
 
     render() {
         return (
             <div class="main-container">
                 <Timeline></Timeline>
-                <NewMetric isVisible={this.state.isNewMetricVisible}></NewMetric>
+                <NewMetric 
+                    isVisible={this.state.isNewMetricVisible}
+                    onClickCloseModal={this.onClickCloseModal}></NewMetric>
                 <FloatingButton onClickOpenModal={this.onClickOpenModal} />
             </div>
         );
