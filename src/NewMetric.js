@@ -3,11 +3,42 @@ import { Button, Modal } from 'react-bootstrap';
 import React from "react";
 import Form from 'react-bootstrap/Form'
 
-function NewMetric(props) {
+class NewMetric extends React.Component {
+
+  constructor(){
+    super();
+
+    this.state = {
+      name: '',
+      value:'',
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    const data = { 
+      name: this.state.name, 
+      value:this.state.value
+    }
+
+    fetch('/api/metric', { 
+      method: 'POST', 
+      body: JSON.stringify(data),
+      headers:{ 'Content-Type': 'application/json' } 
+    })
+      .then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', response));
+  }
+
+  render() {
     return (
       <div>
-        <Form>
-          <Modal show={props.isVisible} onHide={()=> props.onClickCloseModal()}>
+        <Form onSubmit={this.handleSubmit}>
+          <Modal show={this.props.isVisible} onHide={()=> this.props.onClickCloseModal()}>
             <Modal.Header closeButton>
               <Modal.Title>New Metric</Modal.Title>
             </Modal.Header>
@@ -15,19 +46,19 @@ function NewMetric(props) {
               Please, complete the following form:
                 <Form.Group className="mb-3">
                   <Form.Label>Metric name</Form.Label>
-                  <Form.Control />
+                  <Form.Control id="name" name="name" type="text" />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                   <Form.Label>Metric value</Form.Label>
-                  <Form.Control />
+                  <Form.Control id="value" name="value" type="text" />
                 </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="default" onClick={()=> props.onClickCloseModal()}>
+              <Button variant="default" onClick={()=> this.props.onClickCloseModal()}>
                 Close
               </Button>
-              <Button variant="primary" onClick={()=> props.onClickCloseModal()} type="submit">
+              <Button variant="primary" onClick={()=> this.props.onClickCloseModal()} type="submit">
                 Save Changes
               </Button>
             </Modal.Footer>
@@ -36,5 +67,6 @@ function NewMetric(props) {
       </div>
     );
   }
+}
   
 export default NewMetric;
