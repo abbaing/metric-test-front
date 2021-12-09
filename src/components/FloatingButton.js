@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import FloatingButtons from 'react-floating-buttons'
 
-import addPencilIcon from './assets/add-pencil.png'
-import addBlankIcon from './assets/add-blank.png'
+import addPencilIcon from '../assets/add-pencil.png'
+import addBlankIcon from '../assets/add-blank.png'
 
 export default class FloatingButton extends Component {
 
