@@ -36,8 +36,9 @@ export default class Timeline extends React.Component {
       return (
       <VerticalTimeline>
         <ul>
-          {this.state.metrics.map(metric => (
+          {this.state.metrics.map((metric, i) => (
             <VerticalTimelineElement
+                key={i}
                 className="vertical-timeline-element--work"
                 date={this.formatDate(metric.time)}
                 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}

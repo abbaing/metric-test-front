@@ -21,8 +21,13 @@ class NewMetric extends React.Component {
 
     const data = { 
       name: this.state.name, 
-      value:this.state.value
+      value:this.state.value,
+      time:Date.now(),
     }
+
+    fetch(process.env.REACT_APP_API_URL + '/metrics')
+    .then((response) => response.json())
+    .then(metrics => this.setState({metrics}))
 
     fetch('/api/metric', { 
       method: 'POST', 

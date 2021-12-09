@@ -26,7 +26,7 @@ class MainContainer extends React.Component {
 
     render() {
         return (
-            <div class="main-container">
+            <div className="main-container">
                 <Timeline></Timeline>
                 <NewMetric 
                     isVisible={this.state.isNewMetricVisible}
