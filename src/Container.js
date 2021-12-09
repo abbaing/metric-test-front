@@ -10,20 +10,20 @@ class MainContainer extends React.Component {
     constructor(){
         super();
         this.state = {
-            isNewMetricVisible: false
+            isNewMetricVisible: false,
         }
         this.onClickOpenModal = this.onClickOpenModal.bind(this)
     }
 
     onClickOpenModal() {
-        this.setState({ isNewMetricVisible: true });
+        this.setState(isNewMetricVisible => ({ isNewMetricVisible: true }));
     }
 
     render() {
         return (
             <div class="main-container">
                 <Timeline></Timeline>
-                <NewMetric></NewMetric>
+                <NewMetric isVisible={this.state.isNewMetricVisible}></NewMetric>
                 <FloatingButton onClickOpenModal={this.onClickOpenModal} />
             </div>
         );

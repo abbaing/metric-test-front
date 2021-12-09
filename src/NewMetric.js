@@ -1,7 +1,8 @@
 import { Button, Modal } from 'react-bootstrap';
 import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-function NewMetric() {
+function NewMetric(props) {
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
@@ -13,7 +14,7 @@ function NewMetric() {
           Launch demo modal
         </Button>
   
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={props.isVisible} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
