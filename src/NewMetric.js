@@ -58,7 +58,7 @@ class NewMetric extends React.Component {
               <Button variant="default" onClick={()=> this.props.onClickCloseModal()}>
                 Close
               </Button>
-              <Button variant="primary" onClick={()=> this.props.onClickCloseModal()} type="submit">
+              <Button variant="primary" type="submit">
                 Save Changes
               </Button>
             </Modal.Footer>
