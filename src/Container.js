@@ -7,8 +7,16 @@ import FloatingButton from './FloatingButton.js'
 
 class MainContainer extends React.Component {
     
+    constructor(){
+        super();
+        this.state = {
+            isNewMetricVisible: false
+        }
+        this.onClickOpenModal = this.onClickOpenModal.bind(this)
+    }
+
     onClickOpenModal() {
-        alert('hey!');
+        this.setState({ isNewMetricVisible: true });
     }
 
     render() {
