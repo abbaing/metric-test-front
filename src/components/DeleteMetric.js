@@ -1,21 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { Button, Modal } from 'react-bootstrap';
 import React from "react";
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
+import MetricService from '../data-layer/MetricService';
 
 class DeleteMetric extends React.Component {
 
   deleteMetric = () => {
     
-    fetch(process.env.REACT_APP_API_URL + 'metrics/' + this.props.metric?.id, { 
-      method: 'DELETE'
-    })
-    .then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => {
-      console.log('Success:', response);
-      this.props.onYesSelected();
-    });
+    MetricService.delete(
+      this.props.metric?.id,
+      () => { this.props.onYesSelected(); }
+    )
   }
 
   render() {

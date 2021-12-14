@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { Button, Modal } from 'react-bootstrap';
 import React from "react";
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
+import MetricService from '../data-layer/MetricService';
 
 class NewMetric extends React.Component {
 
@@ -22,28 +23,18 @@ class NewMetric extends React.Component {
 
     this.setState({ isPosting: true });
 
-    const data = { 
-      name: this.state.name, 
-      value: this.state.value,
-      time: new Date(),
-    }
-    
-    fetch(process.env.REACT_APP_API_URL + '/metrics', { 
-      method: 'POST', 
-      body: JSON.stringify(data),
-      headers:{ 'Content-Type': 'application/json' } 
-    })
-    .then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => {
-      console.log('Success:', response);
-      this.setState({ 
-        isPosting: false,
-        name: '',
-        value:'',
-       });
-       this.props.onPostSubmit();
-    });
+    MetricService.add(
+      this.state.name,
+      this.state.value,
+      () => { 
+        this.setState({ 
+          isPosting: false,
+          name: '',
+          value:'',
+        });
+        this.props.onPostSubmit(); 
+      }
+    )
   }
 
   handleNameChanged = (e) => {
