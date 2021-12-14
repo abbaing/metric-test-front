@@ -1,5 +1,15 @@
 const MetricService = {
 
+    getAll: function(callbackFunction) {
+
+        fetch(process.env.REACT_APP_API_URL + '/metrics')
+        .then((response) => response.json())
+        .then(response => {
+            console.log('Success:', response);
+            callbackFunction(response);
+        });
+    },
+
     add: function(name, value, callbackFunction) {
         
         const data = { 

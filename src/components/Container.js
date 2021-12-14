@@ -5,6 +5,7 @@ import Timeline from './Timeline.js'
 import NewMetric from './NewMetric.js'
 import FloatingButton from './FloatingButton.js'
 import DeleteMetric from './DeleteMetric'
+import MetricService from '../data-layer/MetricService'
 
 class MainContainer extends React.Component {
     
@@ -35,9 +36,7 @@ class MainContainer extends React.Component {
     }
 
     loadMetrics(){
-        fetch(process.env.REACT_APP_API_URL + '/metrics')
-        .then((response) => response.json())
-        .then(metrics => this.setState({metrics}))
+        MetricService.getAll((metrics) => this.setState({metrics}));
     }
 
     onDeleteMetric = (metric) => {
