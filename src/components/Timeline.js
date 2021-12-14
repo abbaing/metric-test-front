@@ -10,15 +10,6 @@ export default class Timeline extends React.Component {
 
   constructor() {
     super();
-    this.state = {
-      metrics: []
-    }
-  }
-
-  componentDidMount(){
-    fetch(process.env.REACT_APP_API_URL + '/metrics')
-    .then((response) => response.json())
-    .then(metrics => this.setState({metrics}))
   }
 
   formatDate(dateString) {
@@ -36,7 +27,7 @@ export default class Timeline extends React.Component {
       return (
       <VerticalTimeline>
         <ul>
-          {this.state.metrics.map((metric, i) => (
+          {this.props.metrics.map((metric, i) => (
             <VerticalTimelineElement
                 key={i}
                 className="vertical-timeline-element--work"

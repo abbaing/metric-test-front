@@ -11,6 +11,7 @@ class NewMetric extends React.Component {
     this.state = {
       name: '',
       value:'',
+      isPosting: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,6 +19,8 @@ class NewMetric extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
+    this.setState({ isPosting: true });
 
     const data = { 
       name: this.state.name, 
@@ -34,16 +37,21 @@ class NewMetric extends React.Component {
     .catch(error => console.error('Error:', error))
     .then(response => {
       console.log('Success:', response);
-      //this.setState({metrics});
+      this.setState({ 
+        isPosting: false,
+        name: '',
+        value:'',
+       });
+       this.props.onPostSubmit();
     });
   }
 
   handleNameChanged = (e) => {
-    this.setState({name: e.target.value})
+    this.setState({name: e.target.value});
   }
 
   handleValueChanged = (e) => {
-    this.setState({value: e.target.value})
+    this.setState({value: e.target.value});
   }
 
   render() {
@@ -74,8 +82,8 @@ class NewMetric extends React.Component {
               <input
                 className="btn btn-primary modal-btn"
                 type="submit"
-                disabled={!isEnabled}
-                value="Save Changes"
+                disabled={!this.state.isPosting & !isEnabled}
+                value={this.state.isPosting ? "Saving..." : "Save Metric"}
               />
             </Modal.Footer>
           </form>
