@@ -17,6 +17,7 @@ class NewMetric extends React.Component {
   }
 
   handleSubmit(event) {
+    alert('');
     event.preventDefault();
 
     const data = { 
@@ -51,8 +52,8 @@ class NewMetric extends React.Component {
     const isEnabled = this.state.name.length > 0 && this.state.value.length > 0;
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
-          <Modal show={this.props.isVisible} onHide={()=> this.props.onClickCloseModal()}>
+        <Modal show={this.props.isVisible} onHide={()=> this.props.onClickCloseModal()}>
+          <form onSubmit={this.handleSubmit}>
             <Modal.Header closeButton>
               <Modal.Title>New Metric</Modal.Title>
             </Modal.Header>
@@ -72,10 +73,15 @@ class NewMetric extends React.Component {
               <Button variant="default" onClick={()=> this.props.onClickCloseModal()}>
                 Close
               </Button>
-              <Button type="button" disabled={!isEnabled}>Save Changes</Button>
+              <input
+                className="btn btn-primary modal-btn"
+                type="submit"
+                disabled={!isEnabled}
+                value="Save Changes"
+              />
             </Modal.Footer>
-          </Modal>
-        </Form>
+          </form>
+        </Modal>
       </div>
     );
   }
