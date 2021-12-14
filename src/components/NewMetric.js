@@ -39,7 +39,16 @@ class NewMetric extends React.Component {
       .then(response => console.log('Success:', response));
   }
 
+  handleNameChanged = (e) => {
+    this.setState({name: e.target.value})
+  }
+
+  handleValueChanged = (e) => {
+    this.setState({value: e.target.value})
+  }
+
   render() {
+    const isEnabled = this.state.name.length > 0 && this.state.value.length > 0;
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
@@ -51,21 +60,19 @@ class NewMetric extends React.Component {
               Please, complete the following form:
                 <Form.Group className="mb-3">
                   <Form.Label>Metric name</Form.Label>
-                  <Form.Control id="name" name="name" type="text" />
+                  <Form.Control name="name" value={this.state.name} onChange={this.handleNameChanged} />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                   <Form.Label>Metric value</Form.Label>
-                  <Form.Control id="value" name="value" type="text" />
+                  <Form.Control name="value" value={this.state.value} onChange={this.handleValueChanged} />
                 </Form.Group>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="default" onClick={()=> this.props.onClickCloseModal()}>
                 Close
               </Button>
-              <Button variant="primary" type="submit">
-                Save Changes
-              </Button>
+              <Button type="button" disabled={!isEnabled}>Save Changes</Button>
             </Modal.Footer>
           </Modal>
         </Form>
