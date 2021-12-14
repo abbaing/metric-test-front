@@ -3,9 +3,9 @@ import '@testing-library/jest-dom';
 import { shallow } from 'enzyme';
 import DeleteMetric from './DeleteMetric';
 
-describe('Probamos el componente <DeleteMetric />', () => {    
+describe('Testing the component <DeleteMetric />', () => {    
     let component = shallow(<DeleteMetric />);
-	test('debería mostrar <DeleteMetric /> correctamente ', () => {
+	test('It should shows <DeleteMetric /> correctly', () => {
         expect(component).toMatchSnapshot();
         component.unmount();
 	});
