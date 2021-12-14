@@ -51,6 +51,7 @@ class MainContainer extends React.Component {
 
     onYesSelected = () => {
         this.setState({ isDeleteMetricVisible: false });
+        this.loadMetrics();
     }
 
     render() {
