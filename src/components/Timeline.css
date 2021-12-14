@@ -1,3 +1,6 @@
 .inside-button {
     min-width: 24px;
 }
+.vertical-timeline-element-subtitle {
+    color: gray;
+}

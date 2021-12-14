@@ -1,9 +1,10 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
 import './Timeline.css';
 
 export default class Timeline extends React.Component {
@@ -35,8 +36,15 @@ export default class Timeline extends React.Component {
                 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
                 icon={<FontAwesomeIcon icon={faCheckCircle} className="inside-button" />}
               >
-                <h3 className="vertical-timeline-element-title">Metric registry</h3>
-                <h4 className="vertical-timeline-element-subtitle">{metric.name}</h4>
+                <h3 className="vertical-timeline-element-title">{metric.name}
+                  <button 
+                    className='btn' 
+                    title='Remove this metric' 
+                    onClick={()=> this.props.onDeleteMetric(metric)} >
+                    <FontAwesomeIcon icon={faTrash} className="inside-button" />
+                  </button>
+                </h3>
+                <h4 className="vertical-timeline-element-subtitle">Metric registry</h4>
                 <p>
                   {metric.value}
                 </p>
