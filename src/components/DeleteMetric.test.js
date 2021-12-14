@@ -12,10 +12,23 @@ describe('Testing the component <DeleteMetric />', () => {
         component.unmount();
 	});
 
+    test('It should shows <DeleteMetric /> with title text validation', () => {
+        component = shallow(<DeleteMetric />);
+        expect(component.find(Modal.Title).text()).toContain('Confirm');
+        component.unmount();
+	});
+
+    test('It should shows <DeleteMetric /> with invisible flag', () => {
+        const isDeleteMetricVisible = false;
+        component = shallow(<DeleteMetric isVisible={isDeleteMetricVisible} />);
+        expect(component.find(Modal).prop('show')).toBe(false);
+        component.unmount();
+	});
+
     test('It should shows <DeleteMetric /> with visible flag', () => {
         const isDeleteMetricVisible = true;
         component = shallow(<DeleteMetric isVisible={isDeleteMetricVisible} />);
-        expect(component.find(Modal.Title).text()).toContain('Confirm');
+        expect(component.find(Modal).prop('show')).toBe(true);
         component.unmount();
 	});
 });
