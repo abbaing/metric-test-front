@@ -25,7 +25,7 @@ class NewMetric extends React.Component {
     const data = { 
       name: this.state.name, 
       value: this.state.value,
-      time: Date.now(),
+      time: new Date(),
     }
     
     fetch(process.env.REACT_APP_API_URL + '/metrics', { 
