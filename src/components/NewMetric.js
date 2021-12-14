@@ -17,27 +17,25 @@ class NewMetric extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('');
     event.preventDefault();
 
     const data = { 
       name: this.state.name, 
-      value:this.state.value,
-      time:Date.now(),
+      value: this.state.value,
+      time: Date.now(),
     }
-
-    fetch(process.env.REACT_APP_API_URL + '/metrics')
-    .then((response) => response.json())
-    .then(metrics => this.setState({metrics}))
-
-    fetch('/api/metric', { 
+    
+    fetch(process.env.REACT_APP_API_URL + '/metrics', { 
       method: 'POST', 
       body: JSON.stringify(data),
       headers:{ 'Content-Type': 'application/json' } 
     })
-      .then(res => res.json())
-      .catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', response));
+    .then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => {
+      console.log('Success:', response);
+      //this.setState({metrics});
+    });
   }
 
   handleNameChanged = (e) => {
