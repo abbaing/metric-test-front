@@ -3,9 +3,11 @@ import React from 'react'
 import './Container.css'
 import Timeline from './Timeline.js'
 import NewMetric from './NewMetric.js'
+import Dashboard from './Dashboard.js'
 import FloatingButton from './FloatingButton.js'
 import DeleteMetric from './DeleteMetric'
 import MetricService from '../data-layer/MetricService'
+import CalculationService from '../data-layer/CalculationService'
 
 class MainContainer extends React.Component {
     
@@ -17,6 +19,9 @@ class MainContainer extends React.Component {
             metricToDelete: null,
             lastTableUpdate: Date.now(),
             metrics: [],
+            averagePerMinute: 0.0,
+            averagePerHour: 0.0,
+            averagePerDay: 0.0,
         }
         this.onClickOpenModal = this.onClickOpenModal.bind(this);
         this.onClickCloseModal = this.onClickCloseModal.bind(this);
@@ -24,6 +29,7 @@ class MainContainer extends React.Component {
 
     componentDidMount(){
         this.loadMetrics();
+        this.loadDashboard();
     }
 
     onClickOpenModal() {
@@ -33,10 +39,17 @@ class MainContainer extends React.Component {
     onClickCloseModal() {
         this.setState({ isNewMetricVisible: false });
         this.loadMetrics();
+        this.loadDashboard();
     }
 
-    loadMetrics(){
+    loadMetrics() {
         MetricService.getAll((metrics) => this.setState({metrics}));
+    }
+
+    loadDashboard() {
+        CalculationService.getAveragePerMinute((averagePerMinute) => this.setState({averagePerMinute}));
+        CalculationService.getAveragePerHour((averagePerHour) => this.setState({averagePerHour}));
+        CalculationService.getAveragePerDay((averagePerDay) => this.setState({averagePerDay}));
     }
 
     onDeleteMetric = (metric) => {
@@ -51,11 +64,18 @@ class MainContainer extends React.Component {
     onYesSelected = () => {
         this.setState({ isDeleteMetricVisible: false });
         this.loadMetrics();
+        this.loadDashboard();
     }
 
     render() {
         return (
             <div className="main-container">
+                <br />
+                <Dashboard
+                    averagePerMinute={this.state.averagePerMinute}
+                    averagePerHour={this.state.averagePerHour}
+                    averagePerDay={this.state.averagePerDay}>
+                </Dashboard>
                 <Timeline 
                     metrics={this.state.metrics}
                     onDeleteMetric={this.onDeleteMetric}></Timeline>
